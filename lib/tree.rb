@@ -84,22 +84,21 @@ def level_order(&block)
 end
 
 # Inorder traversal
-def inorder(node = @root, &block)
+def inorder(node = @root, result = [], &block)
  return nil if node.nil?
- result = []
-  inorder(node.left, &block)
+ 
+  inorder(node.left, result, &block)
   block_given? ? yield(node.data) : result << node.data
-  inorder(node.right, &block)
+  inorder(node.right, result, &block)
   result
 end
 
 # Preorder traversal
-def preorder(node = @root, &block)
+def preorder(node = @root, result = [], &block)
   return if node.nil?
-  result = []
   block_given? ? yield(node.data) : result << node.data
-  preorder(node.left, &block)
-  preorder(node.right, &block)
+  preorder(node.left, result, &block)
+  preorder(node.right, result, &block)
   result
 end
 
